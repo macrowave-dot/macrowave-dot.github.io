@@ -14,26 +14,52 @@
     html,body{height:100%;margin:0;}
     body{
       display:flex;
-      flex-direction:column;
       align-items:center;
       justify-content:center;
       background: radial-gradient(1200px 600px at 10% 20%, rgba(99,102,241,0.08), transparent),
                   radial-gradient(1000px 500px at 90% 80%, rgba(139,92,246,0.06), transparent),
                   var(--bg);
       font-family: sans-serif;
-      text-align: center;
+      overflow:hidden;
     }
 
     .stage{
-      width:min(720px, 92vw);
-      aspect-ratio: 16 / 9;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       position:relative;
+      animation: slideUp 1s ease-out forwards;
     }
+
     svg{width:100%;height:100%;display:block;}
     .ring{mix-blend-mode:screen;filter: drop-shadow(0 10px 30px rgba(0,0,0,0.35));transform-origin:50% 50%;}
     .r1{animation: floatA 9s ease-in-out infinite, rotateSlow 24s linear infinite;}
     .r2{animation: floatB 10.5s ease-in-out infinite, rotateSlowRev 28s linear infinite;}
     .r3{animation: floatC 8.2s ease-in-out infinite, rotateSlow 26s linear infinite;}
+
+    .center-text{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      color:white;
+      text-align:center;
+      animation: fadeIn 1.5s ease forwards 1s;
+    }
+    .center-text h1{
+      margin:0;
+      font-size:2.5rem;
+    }
+    .center-text p{
+      margin:0.5rem 0 0;
+      font-size:1.2rem;
+      color:rgba(255,255,255,0.75);
+    }
+
+    @keyframes slideUp{0%{transform:translateY(100vh);}100%{transform:translateY(0);}}
+    @keyframes fadeIn{from{opacity:0;transform:translate(-50%,-60%);}to{opacity:1;transform:translate(-50%,-50%);}}
 
     @keyframes rotateSlow{0%{transform: rotate(0deg);}100%{transform: rotate(360deg);}}
     @keyframes rotateSlowRev{0%{transform: rotate(0deg);}100%{transform: rotate(-360deg);}}
@@ -42,12 +68,9 @@
     @keyframes floatC{0%{transform: translate(0%, 6%);}25%{transform: translate(-4%, 2%);}50%{transform: translate(0%, -6%);}75%{transform: translate(5%, -1%);}100%{transform: translate(0%, 6%);}}
 
     @media (prefers-reduced-motion: reduce){.r1,.r2,.r3{animation:none;}svg{transform:none;}}
-    .caption{position:absolute;left:12px;bottom:12px;color:rgba(255,255,255,0.65);font-size:12px;letter-spacing:0.6px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:6px 8px;border-radius:8px;backdrop-filter: blur(6px);}
   </style>
 </head>
 <body>
-  <h1 style="color:white;margin-bottom:0.5rem;">🚀 Welcome to MacroWave</h1>
-  <p style="color:rgba(255,255,255,0.75);margin-top:0;">Its under development</p>
   <div class="stage" aria-hidden="false">
     <svg viewBox="0 0 1000 562" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Animated overlapping purple rings">
       <defs>
@@ -72,6 +95,12 @@
         <ellipse cx="500" cy="280" rx="210" ry="120" fill="rgba(68,23,111,0.14)" />
       </g>
     </svg>
+    <div class="center-text">
+      <h1 style="
+    width: max-content;
+">🚀 Welcome to MacroWave</h1>
+      <p>Its under development</p>
+    </div>
   </div>
 </body>
 </html>
