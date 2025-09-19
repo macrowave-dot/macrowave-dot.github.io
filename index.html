@@ -4,9 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MacroWave</title>
+  <style>
+    :root{
+      --bg:#0f0b18;
+      --ring1:#8b5cf6;
+      --ring2:#6d28d9;
+      --ring3:#4c1d95;
+    }
+    html,body{height:100%;margin:0;}
+    body{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(99,102,241,0.08), transparent),
+                  radial-gradient(1000px 500px at 90% 80%, rgba(139,92,246,0.06), transparent),
+                  var(--bg);
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    .stage{
+      width:min(720px, 92vw);
+      aspect-ratio: 16 / 9;
+      position:relative;
+    }
+    svg{width:100%;height:100%;display:block;}
+    .ring{mix-blend-mode:screen;filter: drop-shadow(0 10px 30px rgba(0,0,0,0.35));transform-origin:50% 50%;}
+    .r1{animation: floatA 9s ease-in-out infinite, rotateSlow 24s linear infinite;}
+    .r2{animation: floatB 10.5s ease-in-out infinite, rotateSlowRev 28s linear infinite;}
+    .r3{animation: floatC 8.2s ease-in-out infinite, rotateSlow 26s linear infinite;}
+
+    @keyframes rotateSlow{0%{transform: rotate(0deg);}100%{transform: rotate(360deg);}}
+    @keyframes rotateSlowRev{0%{transform: rotate(0deg);}100%{transform: rotate(-360deg);}}
+    @keyframes floatA{0%{transform: translate(-6%, -2%);}25%{transform: translate(0%, -4%);}50%{transform: translate(6%, 2%);}75%{transform: translate(0%, 5%);}100%{transform: translate(-6%, -2%);}}
+    @keyframes floatB{0%{transform: translate(6%, 2%);}25%{transform: translate(2%, -3%);}50%{transform: translate(-6%, -2%);}75%{transform: translate(4%, 6%);}100%{transform: translate(6%, 2%);}}
+    @keyframes floatC{0%{transform: translate(0%, 6%);}25%{transform: translate(-4%, 2%);}50%{transform: translate(0%, -6%);}75%{transform: translate(5%, -1%);}100%{transform: translate(0%, 6%);}}
+
+    @media (prefers-reduced-motion: reduce){.r1,.r2,.r3{animation:none;}svg{transform:none;}}
+    .caption{position:absolute;left:12px;bottom:12px;color:rgba(255,255,255,0.65);font-size:12px;letter-spacing:0.6px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:6px 8px;border-radius:8px;backdrop-filter: blur(6px);}
+  </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; margin-top: 20vh;">
-  <h1>🚀 Welcome to MacroWave</h1>
-  <p>Its under development</p>
+<body>
+  <h1 style="color:white;margin-bottom:0.5rem;">🚀 Welcome to MacroWave</h1>
+  <p style="color:rgba(255,255,255,0.75);margin-top:0;">Its under development</p>
+  <div class="stage" aria-hidden="false">
+    <svg viewBox="0 0 1000 562" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Animated overlapping purple rings">
+      <defs>
+        <radialGradient id="g1" cx="30%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.04" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <g class="ring r1" transform="translate(260,280)">
+        <circle cx="0" cy="0" r="180" fill="rgba(139,92,246,0.18)" />
+        <circle cx="0" cy="0" r="140" fill="url(#g1)" />
+      </g>
+      <g class="ring r2" transform="translate(500,280)">
+        <circle cx="0" cy="0" r="180" fill="rgba(109,40,217,0.18)" />
+        <circle cx="0" cy="0" r="140" fill="url(#g1)" />
+      </g>
+      <g class="ring r3" transform="translate(740,280)">
+        <circle cx="0" cy="0" r="180" fill="rgba(76,29,149,0.18)" />
+        <circle cx="0" cy="0" r="140" fill="url(#g1)" />
+      </g>
+      <g style="mix-blend-mode:multiply; opacity:0.82;">
+        <ellipse cx="500" cy="280" rx="210" ry="120" fill="rgba(68,23,111,0.14)" />
+      </g>
+    </svg>
+  </div>
 </body>
 </html>
